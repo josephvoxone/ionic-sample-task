@@ -1,17 +1,81 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+<ion-header mode="md" [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title> Profile </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-list lines="none">
+    <ion-list-header>
+      <ion-label><b>Information</b></ion-label>
+    </ion-list-header>
+    <ion-router-link href="mailto:josephshandyharvian@gmail.com">
+      <ion-item detail>
+        <ion-icon slot="start" color="medium" name="mail"></ion-icon>
+        <ion-label>
+          <h3>Email</h3>
+          <p>josephshandyharvian@gmail.com</p>
+        </ion-label>
+      </ion-item>
+    </ion-router-link>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-router-link
+      href="https://www.linkedin.com/in/joseph-shandy"
+      target="_blank"
+    >
+      <ion-item detail>
+        <ion-icon slot="start" color="medium" name="logo-linkedin"></ion-icon>
+        <ion-label>
+          <h3>Linkedin</h3>
+          <p>Joseph Shandy Harvian</p>
+        </ion-label>
+      </ion-item>
+    </ion-router-link>
+
+    <ion-router-link href="tel:+6289615141859">
+      <ion-item detail>
+        <ion-icon slot="start" color="medium" name="call"></ion-icon>
+        <ion-label>
+          <h3>Phone Number</h3>
+          <p>+6289615141859</p>
+        </ion-label>
+      </ion-item>
+    </ion-router-link>
+
+    <ion-router-link
+      href="https://goo.gl/maps/bcySQWxwcfuxGiRf6"
+      target="_blank"
+    >
+      <ion-item detail>
+        <ion-icon slot="start" color="medium" name="navigate-circle"></ion-icon>
+        <ion-label>
+          <h3>Where am I ?</h3>
+          <p>Indonesia</p>
+        </ion-label>
+      </ion-item>
+    </ion-router-link>
+
+    <ion-list-header>
+      <ion-label><b>Feature</b></ion-label>
+    </ion-list-header>
+
+    <!-- Exit -->
+    <ion-item (click)="signOut()" routerDirection="forward">
+      <ion-icon slot="start" color="medium" name="power-outline"></ion-icon>
+      <ion-label>
+        <h3>Sign Out</h3>
+        <p>Exit from apps</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar class="padding-footer">
+    <ion-label>
+      <p color="dark" class="ion-padding ion-text-center">
+        This Application for Interview Purpose
+      </p>
+    </ion-label>
+  </ion-toolbar>
+</ion-footer>

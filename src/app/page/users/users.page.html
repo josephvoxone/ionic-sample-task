@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar color="primary">
+    <ion-title>Users</ion-title>
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button
+        mode="md"
+        text=""
+        defaultHref=""
+        color="light"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ng-container *ngIf="loading">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </ng-container>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="md">
+  <!-- Data Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-router-link *ngFor="let user of users" href="mailto:{{user.email}}">
+      <ion-card mode="ios" button>
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <ion-img [src]="user.avatar"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <h2><strong>{{user.first_name}} {{user.last_name}}</strong></h2>
+            <p>{{user.email}}</p>
+          </ion-label>
+          <ion-chip color="primary">
+            <strong>Contact</strong><ion-icon name="mail"></ion-icon
+          ></ion-chip>
+        </ion-item>
+      </ion-card>
+    </ion-router-link>
+  </ion-list>
+
+  <!-- Infinite Scroll -->
+  <ion-infinite-scroll threshold="1000px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="crescent"
+      loadingText="Loading..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,82 @@
+ion-content {
+    --background: linear-gradient(#2c335a, #000361);
+    --offset-bottom: 100vh !important;
+}
+
+ion-toolbar {
+    --background: transparent;
+}
+
+.round {
+    display: block;
+
+    .position {
+        width: 100%;
+        overflow: hidden;
+        position: absolute;
+        z-index: 0;
+        bottom: 0;
+        height: 250px;
+
+        // Role Admin
+        .background {
+            height: 220px;
+            background: linear-gradient(180deg, rgb(22 104 96 / 0%), #10145f);
+            position: relative;
+        }
+    }
+}
+
+
+ion-card-title {
+    font-size: 40px;
+    color: #fff;
+    font-family: 'gtsuper';
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.desc {
+    color: #fff;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 300;
+}
+
+.logo {
+    width: 30vh;
+    margin: auto;
+}
+
+.separator {
+    display: block;
+    margin: 16px auto;
+    padding: 4px;
+    border-radius: 10px;
+    width: 64px;
+    background: #f3a227;
+}
+
+
+.welcome {
+    position: absolute;
+    bottom: 3vh;
+    width: 100%;
+}
+
+.seleksi {
+    background: #cc0b06;
+    color: #ffffff;
+    width: fit-content;
+    margin-top: 7px;
+    padding: 4px 12px;
+    border-radius: 10px;
+}
+
+.padding-footer {
+    p {
+        text-align: center;
+        z-index: 1;
+        position: relative;
+    }
+}

@@ -1,17 +1,62 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+<ion-header mode="md" [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title> Human Resource Apps</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="round">
+    <div class="position">
+      <div class="background"></div>
+    </div>
+  </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-avatar slot="end">
+        <ion-img src="https://reqres.in/img/faces/4-image.jpg"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{userEmail()}}</h2>
+        <p>Token {{userToken()}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item lines="none" class="title">
+    <ion-label>
+      <h2>Just few data</h2>
+      <p>This data doesn't have pagination</p>
+    </ion-label>
+    <ion-chip (click)="openModal()"> See All </ion-chip>
+  </ion-item>
+
+  <ion-list>
+    <ng-container *ngIf="loading">
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    </ng-container>
+    <ion-item
+      (click)="introduce(user)"
+      *ngFor="let user of users;let index = index"
+      button
+    >
+      <ion-avatar slot="start">
+        <ion-img [src]="user.avatar"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h2><strong>{{user.first_name}} {{user.last_name}}</strong></h2>
+        <p>{{user.email}}</p>
+      </ion-label>
+      <ion-router-link href="mailto:{{user.email}}">
+        <ion-chip color="primary">
+          <strong>Message </strong><ion-icon name="mail"></ion-icon
+        ></ion-chip>
+      </ion-router-link>
+    </ion-item>
+  </ion-list>
 </ion-content>

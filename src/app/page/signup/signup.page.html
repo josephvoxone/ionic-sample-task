@@ -1,0 +1,88 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list-header mode="ios" class="ion-no-padding">
+    <ion-label class="ion-no-margin">
+      <b>Create your account</b>
+      <p>Fill email and password to create an account.</p>
+    </ion-label>
+  </ion-list-header>
+
+  <ion-item class="items-input">
+    <ion-input
+      class="ion-text-lowercase"
+      type="text"
+      (keydown.space)="$event.preventDefault()"
+      placeholder="Email"
+      required
+      [(ngModel)]="user.email"
+    >
+    </ion-input>
+    <ion-icon name="at-circle" icon-start clear item-end></ion-icon>
+  </ion-item>
+
+  <ion-item class="items-input">
+    <ion-input
+      required
+      [type]="!hide ? 'password' : 'text'"
+      placeholder="Password"
+      required
+      (keydown.space)="$event.preventDefault()"
+      [(ngModel)]="user.password"
+    ></ion-input>
+    <ion-icon
+      (click)="hide = !hide"
+      [name]="!hide ? 'eye-off' : 'eye'"
+      icon-start
+      clear
+      item-end
+    ></ion-icon>
+  </ion-item>
+  <ion-item class="items-input">
+    <ion-input
+      required
+      [type]="!hide1 ? 'password' : 'text'"
+      placeholder="Confirm Password"
+      required
+      (keydown.space)="$event.preventDefault()"
+      [(ngModel)]="user.confirm"
+    ></ion-input>
+    <ion-icon
+      (click)="hide1 = !hide1"
+      [name]="!hide1 ? 'eye-off' : 'eye'"
+      icon-start
+      clear
+      item-end
+    ></ion-icon>
+  </ion-item>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar class="padding-footer">
+    <ion-button
+      mode="ios"
+      size="large"
+      type="submit"
+      color="primary"
+      margin-top
+      expand="block"
+      strong
+      (click)="register(user)"
+      [disabled]="user.password != user.confirm || user.email?.length < 1 || user.password?.length < 1 || loading"
+    >
+      <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+      <span *ngIf="!loading">Sign Up</span>
+    </ion-button>
+    <ion-text color="medium" class="ion-text-center">
+      <p>
+        By Clicking sign up, you agree send data to reqres REST-API.
+      </p>
+    </ion-text>
+  </ion-toolbar>
+</ion-footer>

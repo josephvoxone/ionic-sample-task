@@ -1,0 +1,37 @@
+.round {
+    display: block;
+
+    .position {
+        width: 100%;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+
+        // Role Admin
+        .background {
+            height: 60px;
+            border-radius: 0 0 10% 10%;
+            background: linear-gradient(30deg, #3c3f97, #000361);
+            position: relative;
+        }
+    }
+}
+
+.title {
+    h2 {
+        font-weight: 800;
+        margin: 0;
+        font-size: 24px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+ion-card {
+    h2 {
+        font-family: 'gtsuper';
+        font-weight: 800;
+    }
+}

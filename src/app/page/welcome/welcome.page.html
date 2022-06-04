@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border"><ion-toolbar> </ion-toolbar> </ion-header>
+
+<ion-content fullscreen class="gradient-background ion-padding ion-text-center">
+  <ion-card-title>Management</ion-card-title>
+  <ion-card-title>Human Resources</ion-card-title>
+  <div class="separator"></div>
+  <p class="desc">
+    This apps develop and design by <i>Joseph</i> and you can use it for your
+    own purpose. <br /><b>Wish me luck!</b>
+  </p>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar class="padding-footer">
+    <div class="round">
+      <div class="position">
+        <div class="background"></div>
+      </div>
+    </div>
+    <ion-img class="logo ion-padding" src="/assets/img/dogs.png"></ion-img>
+    <ion-button
+      class="ion-margin-horizontal"
+      size="large"
+      mode="ios"
+      color="secondary"
+      expand="block"
+      strong
+      [routerLink]="['/signin']"
+      routerDirection="forward"
+    >
+      Get Started
+    </ion-button>
+    <p class="desc" [routerLink]="['/signup']" routerDirection="forward">
+      Doesnt have any account ?
+      <ion-text color="secondary"><strong>Register</strong></ion-text>
+    </p>
+  </ion-toolbar>
+</ion-footer>
