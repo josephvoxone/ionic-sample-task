@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HelperService } from 'src/app/service/helper/helper.service';
+import { ProfileService } from 'src/app/service/profile/profile.service';
 import { UserService } from 'src/app/service/user/user.service';
 
 @Component({
@@ -12,13 +13,15 @@ export class SignupPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private usersService: UserService,
-    private helper: HelperService
+    private helper: HelperService,
+    private profileService: ProfileService
   ) {}
 
   user: any = {
-    email: 'eve.holt@reqres.in',
-    password: 'cityslicka',
-    confirm: 'cityslicka',
+    email: 'dummy@nirmalab.com',
+    username: 'dummy',
+    password: '123456',
+    confirm: '123456',
   };
   hide: any;
   hide1: any;
@@ -33,8 +36,11 @@ export class SignupPage implements OnInit {
       .registerUser(user)
       .then((resp) => {
         console.log(resp['data']);
-        this.helper.presentToast({ message: `Successfuly created` });
-        this.navCtrl.back();
+        this.profileService.setUser(resp);
+        this.helper.presentToast({
+          message: `Welcome aboard, ${user.username}!`,
+        });
+        this.navCtrl.navigateRoot('/tabs/tab1', { animated: true });
       })
       .catch((e) => {
         console.log(e);

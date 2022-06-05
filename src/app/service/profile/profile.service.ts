@@ -13,14 +13,26 @@ export class ProfileService {
   }
 
   getUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('user'))?.user;
+  }
+
+  getToken() {
+    return JSON.parse(localStorage.getItem('user'))?.jwt;
   }
 
   getEmail() {
     return this.getUser()?.email;
   }
 
-  getToken() {
-    return this.getUser()?.token;
+  getUsername() {
+    return this.getUser()?.username;
+  }
+  
+  isBlocked() {
+    return this.getUser()?.blocked;
+  }
+
+  isConfirmed() {
+    return this.getUser()?.confirmed;
   }
 }

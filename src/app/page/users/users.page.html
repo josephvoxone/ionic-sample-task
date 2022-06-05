@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border" mode="md">
   <ion-toolbar color="primary">
-    <ion-title>Users</ion-title>
+    <ion-title>Employee</ion-title>
     <ion-buttons slot="start" (click)="closeModal()">
       <ion-back-button
         mode="md"
@@ -27,12 +27,12 @@
     <ion-router-link *ngFor="let user of users" href="mailto:{{user.email}}">
       <ion-card mode="ios" button>
         <ion-item lines="none">
-          <ion-avatar slot="start">
-            <ion-img [src]="user.avatar"></ion-img>
+          <ion-avatar slot="start" class="sub-avatar">
+            {{user.attributes.name | slice:0:1}}
           </ion-avatar>
           <ion-label>
-            <h2><strong>{{user.first_name}} {{user.last_name}}</strong></h2>
-            <p>{{user.email}}</p>
+            <h2><strong>{{user.attributes.name}}</strong></h2>
+            <p>{{user.attributes.email}}</p>
           </ion-label>
           <ion-chip color="primary">
             <strong>Contact</strong><ion-icon name="mail"></ion-icon
@@ -41,6 +41,12 @@
       </ion-card>
     </ion-router-link>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" (click)="openAdd()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <!-- Infinite Scroll -->
   <ion-infinite-scroll threshold="1000px" (ionInfinite)="loadMore($event)">

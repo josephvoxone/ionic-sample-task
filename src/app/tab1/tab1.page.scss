@@ -17,6 +17,19 @@
     }
 }
 
+.sub-avatar {
+    font-family: 'gtsuper';
+    background: var(--ion-color-primary);
+    color: var(--ion-color-light);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .title {
     h2 {
         font-weight: 800;

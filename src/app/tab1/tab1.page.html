@@ -17,8 +17,8 @@
         <ion-img src="https://reqres.in/img/faces/4-image.jpg"></ion-img>
       </ion-avatar>
       <ion-label>
-        <h2>{{userEmail()}}</h2>
-        <p>Token {{userToken()}}</p>
+        <h2>Hi, {{userName() | titlecase}}</h2>
+        <p>{{userEmail()}}</p>
       </ion-label>
     </ion-item>
   </ion-card>
@@ -30,7 +30,7 @@
 
   <ion-item lines="none" class="title">
     <ion-label>
-      <h2>Just few data</h2>
+      <h2>Employee few data</h2>
       <p>This data doesn't have pagination</p>
     </ion-label>
     <ion-chip (click)="openModal()"> See All </ion-chip>
@@ -45,12 +45,12 @@
       *ngFor="let user of users;let index = index"
       button
     >
-      <ion-avatar slot="start">
-        <ion-img [src]="user.avatar"></ion-img>
+      <ion-avatar slot="start" class="sub-avatar">
+        {{user.attributes.name | slice:0:1}}
       </ion-avatar>
       <ion-label>
-        <h2><strong>{{user.first_name}} {{user.last_name}}</strong></h2>
-        <p>{{user.email}}</p>
+        <h2><strong>{{user.attributes.name | titlecase}}</strong></h2>
+        <p>{{user.attributes.email}}</p>
       </ion-label>
       <ion-router-link href="mailto:{{user.email}}">
         <ion-chip color="primary">

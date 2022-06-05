@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar color="secondary">
+    <ion-title></ion-title>
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button
+        mode="md"
+        text=""
+        defaultHref=""
+        color="light"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list-header mode="ios" class="ion-no-padding">
+    <ion-label class="ion-no-margin"
+      ><b>Add Employee</b>
+      <p>Create new employee</p>
+    </ion-label>
+  </ion-list-header>
+
+  <ion-item class="items-input">
+    <ion-label>
+      <p>Name</p>
+    </ion-label>
+    <ion-input
+      class="ion-text-right username"
+      type="text"
+      placeholder="Username"
+      required
+      [(ngModel)]="user.name"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item class="items-input">
+    <ion-label>
+      <p>Email</p>
+    </ion-label>
+    <ion-input
+      class="ion-text-right username"
+      type="email"
+      placeholder="Email"
+      required
+      [(ngModel)]="user.email"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item class="items-input">
+    <ion-label><p>Gender</p></ion-label>
+    <ion-select
+      placeholder="Gender"
+      [(ngModel)]="user.gender"
+      mode="ios"
+      interface="popover"
+    >
+      <ion-select-option value="Male">Male</ion-select-option>
+      <ion-select-option value="Female">Female</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar class="padding-footer">
+    <ion-button
+      mode="ios"
+      expand="block"
+      color="secondary"
+      strong
+      type="submit"
+      (click)="createData()"
+      [disabled]="user.name.length == 0 ||  user.gender.length == 0 || user.email.length == 0"
+    >
+      Create
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

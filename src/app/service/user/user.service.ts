@@ -10,15 +10,16 @@ export class UserService {
 
   public login(user) {
     return new Promise(async (resolve, reject) => {
-      this.http.post(`${this.helper.apiEndpoint}/login`, user).subscribe(
+      this.http.post(`${this.helper.apiEndpoint}/auth/local`, user).subscribe(
         (result) => {
           resolve(result);
           console.log('service success', result);
         },
         (err) => {
+          console.log(err);
           reject(err);
           this.helper.errorToast({
-            message: err?.error?.error,
+            message: err?.error?.error?.message,
             position: 'top',
           });
           console.log('service oops', err);
@@ -29,28 +30,8 @@ export class UserService {
 
   registerUser(user) {
     return new Promise(async (resolve, reject) => {
-      this.http.post(`${this.helper.apiEndpoint}/register`, user).subscribe(
-        (result) => {
-          resolve(result);
-          console.log('service success', result);
-        },
-        (err) => {
-          reject(err);
-          this.helper.errorToast({
-            message: err?.error?.error,
-            position: 'top',
-          });
-          console.log('service oops', err);
-        }
-      );
-    });
-  }
-
-  getUsers(params) {
-    // Pagination page and per_page
-    return new Promise(async (resolve, reject) => {
       this.http
-        .get(`${this.helper.apiEndpoint}/users`, { params })
+        .post(`${this.helper.apiEndpoint}/auth/local/register`, user)
         .subscribe(
           (result) => {
             resolve(result);
@@ -59,9 +40,55 @@ export class UserService {
           (err) => {
             reject(err);
             this.helper.errorToast({
-              message: err?.error?.error,
+              message: err?.error?.error?.message,
               position: 'top',
             });
+            console.log('service oops', err);
+          }
+        );
+    });
+  }
+
+  getEmployee(item) {
+    // Pagination page and per_page
+    return new Promise(async (resolve, reject) => {
+      this.http
+        .get(
+          `${this.helper.apiEndpoint}/employees?${this.helper.encodeQS(item)}` //Using encodeQS to convert object to query string
+        )
+        .subscribe(
+          (result) => {
+            resolve(result);
+            console.log('service success', result);
+          },
+          (err) => {
+            reject(err);
+            this.helper.errorToast({
+              message: err?.error?.error?.message,
+              position: 'top',
+            });
+            console.log('service oops', err);
+          }
+        );
+    });
+  }
+
+  createEmployee(item) {
+    return new Promise(async (resolve, reject) => {
+      this.http
+        .post(`${this.helper.apiEndpoint}/employees`, { data: item })
+        .subscribe(
+          (result) => {
+            resolve(result);
+            console.log('service success', result);
+          },
+          (err) => {
+            reject(err?.message);
+            err?.error?.error?.details?.errors.forEach((element) => {
+              console.log(element);
+              this.helper.errorToast({ message: element.message });
+            });
+            this.helper.errorToast({ message: err?.error?.error?.message });
             console.log('service oops', err);
           }
         );

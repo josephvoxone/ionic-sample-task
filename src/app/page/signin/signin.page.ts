@@ -9,7 +9,7 @@ import { UserService } from 'src/app/service/user/user.service';
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-  user: any = { email: 'eve.holt@reqres.in', password: 'cityslicka' };
+  user: any = { identifier: 'joseph@nirmalab.com', password: '123456' };
   loading: boolean = false;
   hide: any;
 
@@ -26,9 +26,8 @@ export class SigninPage implements OnInit {
     await this.userService
       .login(user)
       .then((resp) => {
-        console.log(resp);
-        user.token = resp['token']; //add new object token from reqres
-        this.profileService.setUser(user);
+        // console.log(resp);
+        this.profileService.setUser(resp);
         this.navCtrl.navigateRoot('/tabs/tab1', { animated: true });
       })
       .catch((e) => {

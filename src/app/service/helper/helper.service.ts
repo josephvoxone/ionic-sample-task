@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import * as qs from 'qs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HelperService {
-  public apiEndpoint = `https://reqres.in/api`;
+  // public apiEndpoint = `https://reqres.in/api`; // REQRES API
+  public apiEndpoint = `http://localhost:1337/api`// STRAPI API
 
   constructor(private toastController: ToastController) {}
+
+  encodeQS(data){
+    const query = qs.stringify(data, {
+      encodeValuesOnly: true,
+    });
+
+    return query;
+  }
 
   async presentToast(data) {
     const toast = await this.toastController.create({

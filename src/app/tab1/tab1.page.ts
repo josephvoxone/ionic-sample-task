@@ -25,17 +25,17 @@ export class Tab1Page {
     this.loadData();
   }
 
+  userName() {
+    return this.profileService.getUsername();
+  }
+
   userEmail() {
     return this.profileService.getEmail();
   }
 
-  userToken() {
-    return this.profileService.getToken();
-  }
-
   async loadData() {
     await this.userService
-      .getUsers({ page: 1, per_page: 5 })
+      .getEmployee({ pagination: { page: 0, pageSize: 10, populate: '*' } })
       .then((resp) => {
         // console.log(resp['data'])
         this.users = resp['data'];
@@ -67,7 +67,7 @@ export class Tab1Page {
 
   introduce(item) {
     this.helper.presentToast({
-      message: `This is ${item.first_name}  ${item.last_name}`,
+      message: `This is ${item.attributes.name}`,
     });
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { HelperService } from 'src/app/service/helper/helper.service';
 import { UserService } from 'src/app/service/user/user.service';
+import { UserCrudPage } from '../user-crud/user-crud.page';
 
 @Component({
   selector: 'app-users',
@@ -11,7 +12,7 @@ import { UserService } from 'src/app/service/user/user.service';
 export class UsersPage implements OnInit {
   users: any = [];
   loading: boolean = false;
-  params: any = { page: 0, per_page: 8 };
+  params: any = { pagination: { page: 0, pageSize: 10, populate: '*' } };
 
   constructor(
     private userService: UserService,
@@ -25,11 +26,11 @@ export class UsersPage implements OnInit {
 
   async loadData(params) {
     await this.userService
-      .getUsers(params)
+      .getEmployee(params)
       .then((resp) => {
         // console.log(resp['data'])
         this.users = resp['data'];
-        this.params.page = resp['page'] + 1; //to get current page
+        this.params.pagination.page = resp['meta']['pagination']['page'] + 1; //to get current page
       })
       .catch((e) => {
         console.log(e);
@@ -41,11 +42,11 @@ export class UsersPage implements OnInit {
 
   async loadMore(event) {
     await this.userService
-      .getUsers(this.params)
+      .getEmployee(this.params)
       .then((resp) => {
         console.log(resp);
         if (resp['data'].length > 0) {
-          this.params.page = resp['page'] + 1;
+          this.params.pagination.page = resp['meta']['pagination']['page'] + 1;
           this.users.push(...resp['data']);
         } else {
           // App logic to determine if all data is loaded
@@ -62,11 +63,23 @@ export class UsersPage implements OnInit {
     }, 500);
   }
 
+  async openAdd() {
+    const modal = await this.modalCtrl.create({
+      component: UserCrudPage,
+      mode: 'ios',
+    });
+    modal.onWillDismiss().then(async () => {
+      // console.log("onWillDismiss");
+      await this.loadData({ pagination: { page: 0, pageSize: 10, populate: '*' } });
+    });
+    return await modal.present();
+  }
+
   doRefresh(event) {
     this.loading = true;
 
     setTimeout(() => {
-      this.loadData({ page: 0, per_page: this.params.per_page });
+      this.loadData({ pagination: { page: 0, pageSize: 10, populate: '*' } });
       event.target.complete();
     }, 2000);
   }
@@ -74,4 +87,5 @@ export class UsersPage implements OnInit {
   closeModal() {
     this.modalCtrl.dismiss();
   }
+  
 }
